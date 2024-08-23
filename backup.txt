@@ -1,0 +1,171 @@
+date "+%D %H:%M:%S"
+timedatectl list-timezones / set-timezone Asia/Colombo 
+cat -b|-n|-s [fname]
+cp [sname] [dname]
+mv [sname] [dname]
+wc -l|-w |-c [fname]
+od -c [fname]
+ln -n|-s [fname]
+diff -w -a|-b [fname] [fname]
+cmp [filename] [filename]
+
+ls -l check file default permissions 
+ls -ld dir1 check folder default permissions
+chmod o+x file1.txt | chmod 644 file1.txt
+cat /etc/passwd shadow group gshadow
+useradd -d /home/gem -g developers -c “Gem The Coder” -s /bin/ksh gem-dev
+usermod -aG group_name user_name
+userdel -r gem-dev
+groupadd -g 7500 developers
+groupmod -n [new_name] [old_name]
+groupdel [group_name]
+id -u
+
+-c add comment field.
+-d modify  directory.
+-e make the account expiry in specific period. 
+   usermod -e YYYY-MM-DD user_name
+-g Change the primary group for a user
+-G add a supplementary groups.
+-a add anyone of the group to a secondary group.
+-l change the login name
+-L lock the user account.
+-m moving contents of home dir to new dir.
+   usermod -m -d /new/home/directory user_name
+-p use unencrypted password for new password.
+-s create a specified shell for new accounts.
+-u used to assigned UID for the user account between 0 to 999
+-U unlock the user accounts.
+
+.................................................................
+
+a: Append after cursor | A: Append to line end
+i: Insert before cursor | I: Insert at line start
+o: Open new line below | O: Open new line above
+^F Forward screenful | ^B Backward screenful
+^f One page forward | ^b One page backward
+^U Up half screenful | ^D Down half screenful
+$ Move cursor to the end of current line
+0 Move cursor to the beginning of current line
+w Forward one word | b Backward one word
+
+x Delete character
+dw Delete word from cursor on
+db Delete word backward
+dd Delete line
+d$ Delete to end of line
+d^ Delete to beginning of line
+
+yy Copy current line
+y$ Copy to end of current line from cursor
+yw Copy from cursor to end of current word
+nyy Copy n lines
+
+p paste below cursor
+P paste above cursor
+"2p paste from buffer 2 (there are 9)
+
+u Undo last change
+U Restore line
+J Join next line down to the end of the current line
+w Write workspace to original file
+
+:w file Write workspace to named file
+:e file Start editing a new file
+:r file Read contents of a file to the workspace
+
+. Repeat last command
+cw Change current word to a new word
+r Replace one character at the cursor position
+R Begin overstrike or replace mode   use ESC key to exit
+
+:/ pattern Search forward for the pattern
+:? pattern Search backward for the pattern
+
+..............................................................
+
+ps List all in current shell
+ps -A Display every active
+ps -au Display all + not associated with terminal
+ps -ef Display full-format listing
+ps -x Select all owned by user.
+ps -fu [username |root] To display users process by user id or name
+ps -fg [groupname] 
+ps -fp 1588 Display process by PID and PPID
+ps -e --forest |C sshd Print process tree |for given process.
+kill -o pid
+watch -n 1 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head'
+
+ip link show Display all available network interface
+ip a | addr Identifying Ethernet Interfaces
+sudo lshw -class network Detailed hardware information about network cards on Linux
+ifconfig Check the current IP of the server
+-Temporary IP address assignin
+sudo ip addr add 10.0.2.20/24 dev enp0s3 
+sudo ip link set dev enp0s3 down 
+sudo ip link set dev enp0s3 up 
+ip address show dev enp0s3
+-Configure Default gateway
+sudo ip route add default via 10.0.2.1
+sudo ip route show
+sudo ip addr flush enp0s3 To delete all IP configuration
+cd /etc/netplan Go to netplan directory 
+ll -List out the contents in the netplan
+
+sudo apt install isc-dhcp-server
+sudo vi 00-installer-config.yaml
+network:
+  ethernets:
+     enp0s3:
+       dhcp4: no
+       addresses:
+	- 10.10.10.2/24
+       routes:
+	- to: default
+	  via: 10.10.10.1
+       nameservers:
+	addresses: [8.8.8.8.8.8.4.4]s
+version: 2
+sudo netplan apply
+sudo cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.backup
+sudo nano /etc/dhcp/dhcpd.conf
+sudo systemctl restart/stop/start/status isc-dhcp-server
+sudo tail -f /var/lib/dhcp/dhcpd.leases
+
+...............................................................
+
+sudo mysql -u root -p
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD("newpassword");
+curl http://localhost/
+<?php 
+	$host = "localhost"; 
+	$dbusername = "root"; 
+	$dbpassword = "Testwebpw1$"; 
+	$dbname = "myDB";
+	$conn = new mysqli ($host, $dbusername, $dbpassword, $dbname);
+	$username = $_POST['uname']; 
+	$password = $_POST['upassword'];
+	$sql = "INSERT INTO user (name, password) values ('$username', '$password')";
+	if($conn->query($sql)){ 
+		echo "New record is inserted successfully"; }
+	else { 
+		echo "Error: ". $sql . "<br>". $conn->error; 
+	} $conn->close(); 
+?>
+
+<!DOCTYPE html> 
+<html>
+<head><title>Form site</title></head> 
+<body> 
+<form method="post" action="myform.php"> 
+Username: <input type="text" name="uname"><br><br> 
+Password: <input type="password" name="upassword"><br><br>
+<input type="submit" value="Submit"> 
+</form> 
+</body> 
+</html>
+
+for i in {1..5}
+do
+    echo "Number: $i"
+done
